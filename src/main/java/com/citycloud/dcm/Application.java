@@ -7,11 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 @MapperScan("com.citycloud.dcm.street.mapper")
 public class Application {
-    //提交master
-    //dev分支
-    //master 合并
     public static void main(String[] args) {
-        //nihao
+        Integer integer = new Integer(0);
         SpringApplication.run(Application.class, args);
     }
 
