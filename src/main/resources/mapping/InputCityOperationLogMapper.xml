@@ -1,0 +1,50 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.citycloud.dcm.street.mapper.InputCityOperationLogMapper">
+
+    <insert id="insertForeach" parameterType="java.util.List" useGeneratedKeys="true">
+        insert into input_city_operation_log
+        (name,tb,hb,dateValue,createTime,updateTime,value) values
+        <foreach collection="list" item="item" index="index" separator=",">
+            ( #{item.name},
+            #{item.tb},
+            #{item.hb},
+            #{item.dateValue},
+            now(),
+            now(),
+            #{item.value})
+        </foreach>
+    </insert>
+
+    <select id="findbyNameAndDateValue" resultType="com.citycloud.dcm.street.param.InputCityOperationLog">
+        select * from input_city_operation_log where name = #{name} and dateValue= #{dateValue}
+    </select>
+
+    <select id="findbyDateValue" resultType="com.citycloud.dcm.street.param.InputCityOperationLog">
+        select * from input_city_operation_log where dateValue= #{dateValue}
+    </select>
+
+    <select id="findGroupByDateValue" resultType="map">
+        select dateValue,createTime from input_city_operation_log GROUP BY dateValue limit #{page} ,#{size}
+    </select>
+    <select id="findCount" resultType="integer">
+        select count(*) as number from (
+        select * from input_city_operation_log GROUP BY dateValue
+        )as a
+    </select>
+
+
+    <select id="findByDateValueStartAndEnd" resultType="map">
+        select a.dateValue,a.createTime from (
+        select * from input_city_operation_log GROUP BY dateValue
+        ) a where a.dateValue &gt;= #{startDate} and a.dateValue &lt;= #{endDate}
+    </select>
+
+    <select id="findCountStartAndEnd" resultType="integer">
+        select count(*) as number from (
+        select * from input_city_operation_log GROUP BY dateValue
+        )as a where a.dateValue &gt;= #{startDate} and a.dateValue &lt;= #{endDate}
+    </select>
+
+</mapper>
