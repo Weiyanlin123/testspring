@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Application {
 
     public static void main(String[] args) {
+        Integer integer = new Integer(0);
         Double aDouble = new Double(0);
         SpringApplication.run(Application.class, args);
     }
