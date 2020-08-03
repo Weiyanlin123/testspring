@@ -1,8 +1,10 @@
 package com.citycloud.dcm.street.module.area.controller;
 
 import com.citycloud.dcm.street.config.SingerService;
+import com.citycloud.dcm.street.config.guava.GuavaCache;
 import com.citycloud.dcm.street.mapper.UserMapper;
 import com.citycloud.dcm.street.module.area.service.ExcelService;
+import com.citycloud.dcm.street.param.Sourceip;
 import com.citycloud.dcm.street.param.YidongNetworkEngineer;
 import com.citycloud.dcm.street.util.SrtategyContent;
 import com.citycloud.dcm.street.vo.JsonData;
@@ -47,11 +49,17 @@ public class AreaController {
     @Autowired
     private RedisTemplate<String, Object> redisStrTemplate;
 
+
+    @Autowired
+    private GuavaCache guavaCache;
+
     @Email
    @Value("${aaa}")
-  private String aaa;
+   private String aaa;
 
-    @ApiOperation("阿斯蒂芬")
+
+
+    @ApiOperation("测试")
     @ResponseBody
     @GetMapping("/findAll")
     public JsonData listQueryDistrictStreets() throws Exception{
@@ -62,8 +70,16 @@ public class AreaController {
 //        }
         //redisStrTemplate.opsForValue().set("nihao", JSON.toJSONString(all), 15, TimeUnit.MINUTES);
 
-        String suggestion0 = SrtategyContent.getProperty("suggestion0");
-        return new JsonData(suggestion0);
+
+        Sourceip sourceip = guavaCache.get("sourceip", "100000");
+        Sourceip sourceip2 = guavaCache.get("sourceip", "100000");
+        Sourceip sourceip3 = guavaCache.get("sourceip", "100000");
+        System.out.println(sourceip3);
+        System.out.println(sourceip2);
+        System.out.println(sourceip);
+
+        //String suggestion0 = SrtategyContent.getProperty("suggestion0");
+        return new JsonData(sourceip+"========"+sourceip2+"==========="+sourceip3);
     }
 
 

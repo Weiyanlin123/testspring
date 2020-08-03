@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@Repository("inputCityOperationLogMapper")
+@Repository
 public interface InputCityOperationLogMapper {
     void insertForeach(@Param("list") ArrayList<InputCityOperationLog> list) ;
 
