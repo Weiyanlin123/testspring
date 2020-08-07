@@ -16,10 +16,13 @@ import com.google.common.cache.CacheLoader;
 import com.google.common.cache.CacheStats;
 import com.google.common.cache.LoadingCache;
 
+import javax.annotation.PostConstruct;
+
 /**
  * 过期时间优先级以他们两个最小的值为准
  */
 
+//@Component
 public class GuavaCache {
 
     private long defaultMaximumSize = 20000;// max store size.
