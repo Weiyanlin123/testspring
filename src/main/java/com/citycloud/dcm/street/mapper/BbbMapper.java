@@ -1,17 +1,17 @@
 package com.citycloud.dcm.street.mapper;
 
-import com.citycloud.dcm.street.param.Bbb;
+import com.citycloud.dcm.street.param.bbb;
 
-public interface BbbMapper {
+public interface bbbMapper {
     int deleteByPrimaryKey(Long id);
 
-    int insert(Bbb record);
+    int insert(bbb record);
 
-    int insertSelective(Bbb record);
+    int insertSelective(bbb record);
 
-    Bbb selectByPrimaryKey(Long id);
+    bbb selectByPrimaryKey(Long id);
 
-    int updateByPrimaryKeySelective(Bbb record);
+    int updateByPrimaryKeySelective(bbb record);
 
-    int updateByPrimaryKey(Bbb record);
+    int updateByPrimaryKey(bbb record);
 }

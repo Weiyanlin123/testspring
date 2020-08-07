@@ -42,7 +42,7 @@
                selectByExampleQueryId="false"/>
 
 
-        <table tableName="bbb" domainObjectName="Bbb" enableCountByExample="false"
+        <table tableName="bbb" domainObjectName="bbb" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false"/>
 

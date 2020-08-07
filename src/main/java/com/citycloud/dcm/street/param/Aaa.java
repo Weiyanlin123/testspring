@@ -7,6 +7,10 @@ public class Aaa {
 
     private Integer age;
 
+    private String address;
+
+    private Integer score;
+
     public Long getId() {
         return id;
     }
@@ -29,5 +33,21 @@ public class Aaa {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address == null ? null : address.trim();
+    }
+
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
     }
 }

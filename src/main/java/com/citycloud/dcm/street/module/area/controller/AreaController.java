@@ -1,5 +1,6 @@
 package com.citycloud.dcm.street.module.area.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.citycloud.dcm.street.config.SingerService;
 import com.citycloud.dcm.street.config.guava.GuavaCache;
 import com.citycloud.dcm.street.mapper.AaaMapper;
@@ -29,6 +30,7 @@ import javax.validation.constraints.Email;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @Slf4j
@@ -81,7 +83,7 @@ public class AreaController {
 //
 //
 //        }
-        //redisStrTemplate.opsForValue().set("nihao", JSON.toJSONString(all), 15, TimeUnit.MINUTES);
+        redisStrTemplate.opsForValue().set("nihao", JSON.toJSONString(all), 15, TimeUnit.MINUTES);
         Sourceip sourceip = guavaCache.get("sourceip", "100000");
         Sourceip sourceip2 = guavaCache.get("sourceip", "100000");
         Sourceip sourceip3 = guavaCache.get("sourceip", "100000");
