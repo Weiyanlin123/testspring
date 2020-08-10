@@ -1,6 +1,6 @@
 package com.citycloud.dcm.street.param;
 
-public class bbb {
+public class Bbb {
     private Long id;
 
     private String name;
