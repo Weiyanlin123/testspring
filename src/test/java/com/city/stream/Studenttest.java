@@ -23,10 +23,10 @@ public class Studenttest {
         list.add(p3);
         Person p4 = new Person(1, null, 10);
         Person p5 = new Person(2, null, 20);
-        Person p6 = new Person(2, null, 30);
+
         list2.add(p4);
         list2.add(p5);
-        list2.add(p6);
+
         list.stream().flatMap(x -> list2.stream().filter(
                 y -> x.getId() == y.getId() && x.getAge() == 0 && y.getName() == null)
                 .map(y -> new Person(x.getId(), x.getName(), y.getAge()))

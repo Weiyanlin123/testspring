@@ -3,10 +3,13 @@ package com.city.cloud;
 
 import com.sun.org.apache.xpath.internal.SourceTree;
 import lombok.Data;
+import org.apache.poi.ss.formula.functions.Sumxmy2;
 
 import javax.xml.ws.soap.Addressing;
 import java.util.*;
 import java.util.function.Function;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -26,7 +29,7 @@ public class Student {
 
     private String city;
 
-    private  String star;
+    private String star;
 
     public Student(String id, String name, Integer score, String classmame, String province, String city) {
         this.id = id;
@@ -37,9 +40,45 @@ public class Student {
         this.city = city;
     }
 
-    public Student() { }
+    public Student() {
+    }
 
     public static void main(String[] args) {
+
+         String ff="123,234,456";
+         String ff2="2345,456,";
+
+        String format = String.format("%06d", 11);
+
+        System.out.println(format);
+
+        System.out.println("+++++++++++++++++++++="+ff.contains(ff2));
+
+        List listone = new ArrayList();
+        listone.add("AHRG");
+        listone.add("BHRC");
+        listone.add("WHRA");
+        listone.add("TEMA");
+        listone.add("TEMD");
+
+        List  listt= new ArrayList();
+        listt.add("aaaa");
+        boolean disjoint = Collections.disjoint(listone, listt);
+        System.out.println("==============="+disjoint);//false
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         Student s1 = new Student("20190001", "小A", 80, "初三", "河南", "商丘");
         Student s2 = new Student("20190002", "B", 70, "初三", "河南", "商丘");
         Student s3 = new Student("20190003", "C", 60, "初三", "河南", "濮阳");
@@ -58,23 +97,35 @@ public class Student {
         Double collect = list.stream().filter(st -> st.getProvince() == "河南").collect(Collectors.averagingInt(Student::getScore));
         //分组
         Map<String, IntSummaryStatistics> collect1 = list.stream().filter(st -> st.getProvince() == "河南").collect(Collectors.groupingBy(Student::getCity, Collectors.summarizingInt(Student::getScore)));
-        System.out.println(collect1.get("安阳").getMax());
+
+
+        Map<String, List<Student>> collect4 = list.stream().collect(Collectors.groupingBy(Student::getCity));
+
+
+        System.out.println("最大值"+collect1.get("安阳").getMax());
         System.out.println(collect1.get("安阳").getCount());
-        System.out.println(collect);
+        System.out.println("=============================="+collect4);
+
+
+        Optional<Student> reduce = list.stream().reduce((t1, t2) -> t1.getScore() > t2.getScore() ? t1 : t2);
+
+        System.out.println("reduce find max score"+ reduce.get());
+
+        int sum = list.stream().mapToInt(s -> s.getScore()).sum();
+
+        System.out.println("mapToint 求和"+sum);
+
+
         List<Student> collect2 = list.stream().filter(st -> st.getProvince() == "河南").collect(Collectors.toList());
-         list.stream().filter(st -> st.getProvince().equals("河南")).distinct().map(st -> st.getScore() + 1).collect(Collectors.toList()).forEach(e-> System.out.println(e));
+        list.stream().filter(st -> st.getProvince().equals("河南")).distinct().map(st -> st.getScore() + 1).collect(Collectors.toList()).forEach(e -> System.out.println(e));
 
         List<Integer> aaa = list.stream().filter(st -> st.getProvince().equals("河南")).distinct().map(st -> st.getScore() + 1).collect(Collectors.toList());
 
-         System.out.println(aaa);
-      //  List<Student> collect3 = list.stream().filter(st -> st.getProvince() == "河南").sorted(Comparator.comparing(Student::getScore).reversed()).collect(Collectors.toList());
+        System.out.println(aaa);
+        //  List<Student> collect3 = list.stream().filter(st -> st.getProvince() == "河南").sorted(Comparator.comparing(Student::getScore).reversed()).collect(Collectors.toList());
 
 
-
-
-
-
-       // System.out.println(collect3);
+        // System.out.println(collect3);
 //        System.out.println(collect2);
 //        List<Map<String, Object>> maps = new ArrayList<>();
 //        HashMap<String, Object> map1 = new HashMap<>();
@@ -108,23 +159,35 @@ public class Student {
         students.add(classTwoStudents);
         students.add(classThreeStudents);
 
+        Stream<List<Student>> listStream = Stream.of(classOneStudents, classTwoStudents);
+
+
+        boolean b = classThreeStudents.stream().allMatch(e -> e.getScore() > 60);
+
+        System.out.println("校验所有元素是否匹配大于80"+b);
+
+        /**
+         *
+         */
+        listStream.flatMap(e->classThreeStudents.stream()).collect(Collectors.toList()).forEach(m-> System.out.println(m));
+
 
         /**
          * flatmap 出入的参数必须是 stream
          * map 是收集一个个元素的
          */
-        List<Student> collect3 = classOneStudents.stream().flatMap(one -> classTwoStudents.stream().filter(two -> two.getId().equals(one.getId())).map(
-                s -> {
-                    Student student = new Student();
-                    student.setId(s.getId());
-                    student.setName(one.getName());
-                    student.setClassmame(s.getClassmame());
-                    return student;
-                }
-                )
-        ).collect(Collectors.toList());
+        List<Student> collect3 = classOneStudents.stream().flatMap(one -> classTwoStudents.stream().filter(two -> two.getId().equals(one.getId())).map(s -> {
+            Student student = new Student();
+            student.setId(s.getId());
+            student.setName(one.getName());
+            student.setClassmame(s.getClassmame());
+            return student;
+        })).collect(Collectors.toList());
 
-        System.out.println(collect3);
+      //  System.out.println(collect3);
+
+
+
 
 
         //5 flatMap 把Stream中的层级结构扁平化并返回Stream
@@ -134,8 +197,10 @@ public class Student {
                 .collect(Collectors.toList());
 
         //展开多个List合并到一个新list
-       // studentList.stream().forEach(System.out::println);
-       // System.out.println(students);
+        // studentList.stream().forEach(System.out::println);
+        // System.out.println(students);
+
+
 
     }
 
