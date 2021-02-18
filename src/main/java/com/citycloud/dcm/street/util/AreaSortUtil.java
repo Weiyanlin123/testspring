@@ -73,6 +73,7 @@ public class AreaSortUtil {
         }
         System.out.println("+++++++++++++++" + totalArrayList);
     }
+
     private static JSONObject getMainOrUrbanSortAndSumData(Map<String, Object> map) {
         String key = null;
         Integer total = 0;

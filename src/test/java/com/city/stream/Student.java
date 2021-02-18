@@ -1,16 +1,11 @@
 
-package com.city.cloud;
+package com.city.stream;
 
-import com.sun.org.apache.xpath.internal.SourceTree;
+import com.citycloud.dcm.street.param.Person;
 import lombok.Data;
-import org.apache.poi.ss.formula.functions.Sumxmy2;
 
-import javax.xml.ws.soap.Addressing;
 import java.util.*;
-import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.DoubleStream;
@@ -75,7 +70,7 @@ public class Student {
         Student s4 = new Student("20190004", "D", 10, "初三", "河南", "濮阳");
         Student s5 = new Student("20190005", "E", 40, "初三", "河南", "安阳");
         Student s6 = new Student("20190006", "F", 30, "初三", "河南", "安阳");
-        Student s7 = new Student("20190006", "F", 30, "初三", "河北", "安阳");
+        Student s7 = new Student("20190007", "F", 30, "初三", "河北", "安阳");
         ArrayList<Student> list = new ArrayList<>();
         list.add(s1);
         list.add(s2);
@@ -90,6 +85,8 @@ public class Student {
         System.out.println("过滤条件++++++++++"+collect8);
 
 
+        List<Student> collect10 = list.stream().sorted(Comparator.comparing(Student::getScore).thenComparing(Student::getId)).collect(Collectors.toList());
+        System.out.println("排序操作连续排名+++++++++============++++======"+collect10);
 
 
         //分组
@@ -110,7 +107,6 @@ public class Student {
         System.out.println("最大值"+collect1.get("安阳").getMax());
         System.out.println(collect4.get("安阳"));
         System.out.println("&&&&&&&&"+collect4);
-
 
 
         Optional<Student> reduce = list.stream().reduce((t1, t2) -> t1.getScore() > t2.getScore() ? t1 : t2);
@@ -224,10 +220,9 @@ public class Student {
             System.out.println("111111111111111111111111111111111");
         });
 
-
-
-
     }
+
+
 
 
 }

@@ -24,7 +24,7 @@ public class SrtategyContent {
 //	    String strtategyFile = SrtategyContent.class.getResource("/").getPath()
 //                + "strtategy.properties";
 		/**
-		 * 获取外部配置文件必须和jar包在同步目录下
+		 * 获取外部配置文件必须和jar包在同级别目录下
 		 */
 		String strtategyFile = "strtategy.properties";
 		SrtategyContent.init(strtategyFile);
