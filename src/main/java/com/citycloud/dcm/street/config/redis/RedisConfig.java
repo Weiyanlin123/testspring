@@ -41,5 +41,9 @@ public class RedisConfig {
         redisTemplate.setHashValueSerializer(jackson2JsonRedisSerializer);
         redisTemplate.afterPropertiesSet();
         return redisTemplate;
+
+
+//测试回退一个版本
+
     }
 }
