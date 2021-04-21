@@ -12,17 +12,17 @@ import java.util.concurrent.ConcurrentHashMap;
 public class Application {
 
     public static void main(String[] args) {
-        Integer integer = new Integer(0);
-        Double aDouble = new Double(0);
-        Double aDouble1 = new Double(0);
-        Integer integer1 = new Integer(0);
-
-        ConcurrentHashMap<Object, Object> objectObjectConcurrentHashMap = new ConcurrentHashMap<>();
-        objectObjectConcurrentHashMap.put("","");
-
-        HashMap<Object, Object> objectObjectHashMap = new HashMap<>();
-        objectObjectHashMap.get("");
-        objectObjectHashMap.put("","");
+//        Integer integer = new Integer(0);
+//        Double aDouble = new Double(0);
+//        Double aDouble1 = new Double(0);
+//        Integer integer1 = new Integer(0);
+//
+//        ConcurrentHashMap<Object, Object> objectObjectConcurrentHashMap = new ConcurrentHashMap<>();
+//        objectObjectConcurrentHashMap.put("","");
+//
+//        HashMap<Object, Object> objectObjectHashMap = new HashMap<>();
+//        objectObjectHashMap.get("");
+//        objectObjectHashMap.put("","");
         SpringApplication.run(Application.class, args);
 
     }

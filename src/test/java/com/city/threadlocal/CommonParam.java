@@ -54,7 +54,7 @@ public class CommonParam {
             @Override
             public void run() {
                 CommonParam instance = CommonParam.getInstance();
-                //  instance.setAccountId(2L);
+                 instance.setAccountId(2L);
                 System.out.println(instance);
             }
         }).start();

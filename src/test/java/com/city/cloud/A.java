@@ -7,6 +7,8 @@ import org.apache.axis.client.Service;
 
 import javax.xml.namespace.QName;
 import java.security.SecureRandom;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -56,13 +58,30 @@ public class A {
 //
 //        System.out.println(getNonce_str());
 
-        for(int i=0;i<3;i++){
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            test();
+//        for(int i=0;i<3;i++){
+//            try {
+//                Thread.sleep(1000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//            test();
+//        }
+
+        String beginTime = "2018-07-30 14:42:32";
+        String endTime = "2018-07-29 12:26:32";
+
+        SimpleDateFormat aaaaaaaa = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        try {
+            Date date1 = aaaaaaaa.parse(beginTime);
+            Date date2 = aaaaaaaa.parse(endTime);
+
+            boolean before = date1.before(date2);
+
+            System.out.println(before);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
 
 

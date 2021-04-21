@@ -6,6 +6,8 @@ import lombok.Data;
 import org.apache.poi.ss.formula.functions.Sumxmy2;
 
 import javax.xml.ws.soap.Addressing;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -74,7 +76,7 @@ public class Student {
         Student s3 = new Student("20190003", "C", 60, "初三", "河北", "濮阳");
         Student s4 = new Student("20190004", "D", 10, "初三", "河南", "濮阳");
         Student s5 = new Student("20190005", "E", 40, "初三", "河南", "安阳");
-        Student s6 = new Student("20190006", "F", 30, "初三", "河南", "安阳");
+        Student s6 = new Student("20190006", "F", 30, "初三", "河北", "安阳");
         Student s7 = new Student("20190006", "F", 30, "初三", "河北", "安阳");
         ArrayList<Student> list = new ArrayList<>();
         list.add(s1);
@@ -84,6 +86,23 @@ public class Student {
         list.add(s5);
         list.add(s6);
         list.add(s7);
+        List<Student> collect10 = list.stream().distinct().collect(Collectors.toList());
+
+        System.out.println(collect10);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         Double collect = list.stream().filter(st -> st.getProvince() == "河南").collect(Collectors.averagingInt(Student::getScore));
 
         List<Student> collect8 = list.stream().filter(st -> (!(st.getProvince() != "河南") &&( st.getCity()!="濮阳"))).collect(Collectors.toList());
@@ -99,18 +118,24 @@ public class Student {
         Map<String, List<Student>> collect4 = list.stream().collect(Collectors.groupingBy(Student::getCity));
 
 
+
+
+
+
+
         List<Student> collect6 = list.stream().sorted(Comparator.comparing(Student::getScore)).collect(Collectors.toList());
 
         //userList.sort(Comparator.comparing(User::getId).thenComparing(User::getAge));
         System.out.println("排序降序++++++"+collect6);
         List<Student> collect7 = list.stream().sorted(Comparator.comparing(Student::getScore).reversed()).collect(Collectors.toList());
 
-        System.out.println("排序升序++++++"+collect7);
-
         System.out.println("最大值"+collect1.get("安阳").getMax());
         System.out.println(collect4.get("安阳"));
         System.out.println("&&&&&&&&"+collect4);
-
+        collect4.forEach((key, value) -> {
+            System.out.print("+++++++++++++++++&&&&&&&&key"+key);
+            System.out.println("+++++++++++++++++&&&&&&&&value" + value);
+        });
 
 
         Optional<Student> reduce = list.stream().reduce((t1, t2) -> t1.getScore() > t2.getScore() ? t1 : t2);
@@ -121,9 +146,17 @@ public class Student {
 
 
         System.out.println("mapToint 求和"+sum);
+        System.out.println("mapToint 求和"+sum);
+
+        List<Student> collect2 = list.stream().filter(st -> st.getProvince() == "湖北").collect(Collectors.toList());
+
+        System.out.println("000000000000000000000000000000000"+collect2);
 
 
-        List<Student> collect2 = list.stream().filter(st -> st.getProvince() == "河南").collect(Collectors.toList());
+
+
+
+
         list.stream().filter(st -> st.getProvince().equals("河南")).distinct().map(st -> st.getScore() + 1).collect(Collectors.toList()).forEach(e -> System.out.println(e));
 
         List<Integer> aaa = list.stream().filter(st -> st.getProvince().equals("河南")).distinct().map(st -> st.getScore() + 1).collect(Collectors.toList());
@@ -181,7 +214,7 @@ public class Student {
         /**
          *
          */
-        listStream.flatMap(e->classThreeStudents.stream()).collect(Collectors.toList()).forEach(m-> System.out.println(m));
+        listStream.flatMap(e->classThreeStudents.stream()).collect(Collectors.toList()).forEach(m-> System.out.println(m+"================="));
 
 
         /**
@@ -223,7 +256,6 @@ public class Student {
         st.forEach(e->{
             System.out.println("111111111111111111111111111111111");
         });
-
 
 
 

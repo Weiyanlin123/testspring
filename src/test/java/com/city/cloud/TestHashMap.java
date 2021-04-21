@@ -6,11 +6,39 @@ import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import java.time.Instant;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class TestHashMap {
 
 
     public static void main(String[] args) {
+
+
+
+String url="http://172.18.16.15/szcg/ali/getMediaStream/rec/20210323/5331148397/a6780052-768d-45ed-a98a-288ee19d56c7/1616451175009.jpg?objName=rec/20210323/5331148397/a6780052-768d-45ed-a98a-288ee19d56c7/1616451175009.jpg?1616483983342";
+
+        String ip = getIp(url);
+        String substring = url.substring(url.indexOf(ip)+ip.length(), url.length());
+        System.out.println(url.indexOf(ip));
+        System.out.println(ip);
+        System.out.println(substring);
+
+
+        String b[] = {"1q","aa","cc"};
+
+        String a[] = {"1asd"};
+        StringBuffer stringBuffer = new StringBuffer();
+        for(int i=0;i<a.length;i++){
+            stringBuffer.append(b[i]);
+            stringBuffer.append("|");
+        }
+        System.out.println(stringBuffer.substring(0,stringBuffer.length()-1));
+
+
+
+
+
         HashMap<Object, Object> objectObjectHashMap = new HashMap<>();
         objectObjectHashMap.put("aaa","aaab");
         objectObjectHashMap.put("vvv","aava");
@@ -56,5 +84,28 @@ public class TestHashMap {
 
        list.addAll(null);
 
+
+        ThreadLocal threadLocal = new ThreadLocal();
+        threadLocal.set(1);
+
+
+
+
+
+
+
+
+    }
+
+
+    public static String getIp(String ipString){
+        String regEx="((2[0-4]\\d|25[0-5]|[01]?\\d\\d?)\\.){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)";
+        Pattern p = Pattern.compile(regEx);
+        Matcher m = p.matcher(ipString);
+        while (m.find()) {
+            String result = m.group();
+            return result;
+        }
+        return null;
     }
 }

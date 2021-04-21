@@ -49,5 +49,13 @@ public class ListTest {
 //        System.out.println("---原来的List2---");
 //        list2.parallelStream().forEachOrdered(System.out :: println);
 
+
+        Integer integer = new Integer(1);
+
+        System.out.println("==============="+integer.toString());
+
+
+
+
     }
 }
