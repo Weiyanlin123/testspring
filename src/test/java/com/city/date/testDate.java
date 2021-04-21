@@ -17,6 +17,8 @@ public class testDate {
     public static void main(String[] args) {
 
         System.out.println("ceshihuigun");
+        System.out.println("ceshihuigun2");
+
     }
 
 }
